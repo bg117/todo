@@ -101,6 +101,9 @@ internal static class Manager
     {
         if (!Directory.Exists(CONFIG_DIR))
             Directory.CreateDirectory(CONFIG_DIR);
+
+        if (!Directory.Exists(Path.Combine(CONFIG_DIR, "lists")))
+            Directory.CreateDirectory(Path.Combine(CONFIG_DIR, "lists"));
     }
 
     private static void CheckShouldClear()
@@ -124,7 +127,7 @@ internal static class Manager
 
     private static IEnumerable<string> GetTodoContexts()
     {
-        var files = Directory.GetFiles(CONFIG_DIR);
+        var files = Directory.GetFiles(Path.Combine(CONFIG_DIR, "lists"));
         var dotjson = files.Where(x => x.EndsWith(".json"));
 
         return dotjson;
